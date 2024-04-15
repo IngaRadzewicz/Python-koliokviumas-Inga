@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Užduočių Valdymo Sistema</title>
+    <style>
+        body {
+            font-family: Courier, monospace;
+            background: #e6f7ff;
+            color: #333;
+            padding: 20px;
+        }
+
+        a, button {
+            color: #fdfbfd; /* Violet */
+            background-color: #bb76bb; /* Violet background for buttons */
+            padding: 10px 20px;
+            border: none;
+            text-decoration: none; /* Remove underline from links */
+            font-size: larger; /* Larger font size for better readability */
+        }
+
+        h1 {
+            color: #333;
+            text-align: center; /* Center-align titles */
+        }
+
+        div.links {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sveiki atvykę į Užduočių Valdymo Sistemą</h1>
+    <div class="links">
+        <a href="{{ url_for('manage_users') }}">Vartotojų valdymas</a>
+        <a href="{{ url_for('manage_tasks') }}">Užduočių valdymas</a>
+    </div>
+</body>
+</html>
+

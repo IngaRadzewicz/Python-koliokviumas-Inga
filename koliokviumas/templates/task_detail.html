@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+    <meta charset="UTF-8">
+    <title>Užduoties Redagavimas</title>
+    <style>
+        body {
+            font-family: Courier, monospace;
+            background: #e6f7ff;
+            color: #333;
+            padding: 20px;
+        }
+
+        a, button {
+            color: #fdfbfd; /* Violet */
+            background-color: #bb76bb; /* Violet background for buttons */
+            padding: 10px 20px;
+            border: none;
+            text-decoration: none; /* Remove underline from links */
+            font-size: smaller; /* Smaller font size for links */
+        }
+
+        select, input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+        }
+
+        form {
+            background: #fff;
+            padding: 15px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center; /* Center-align titles */
+        }
+    </style>
+</head>
+<body>
+    <h1>Redaguoti Užduotį</h1>
+    <form action="" method="post">
+        <input type="text" name="title" value="{{ task.title }}" required>
+        <textarea name="description" required>{{ task.description }}</textarea>
+        <select name="user" required>
+            <option value="{{ task.user }}">{{ task.user }}</option>
+            {% for user in users %}
+            <option value="{{ user }}">{{ user }}</option>
+            {% endfor %}
+        </select>
+        <select name="status" required>
+            <option value="{{ task.status }}">{{ task.status }}</option>
+            <option value="Atlikta">Atlikta</option>
+            <option value="Neatlikta">Neatlikta</option>
+            <option value="Nukelta">Nukelta</option>
+        </select>
+        <button type="submit">Atnaujinti</button>
+    </form>
+    <div style="text-align: center;">
+        <a href="{{ url_for('manage_tasks') }}">Atgal į užduočių sąrašą</a>
+    </div>
+</body>
+</html>
+

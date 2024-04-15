@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+    <meta charset="UTF-8">
+    <title>Užduotys</title>
+    <style>
+        body {
+            font-family: Courier, monospace;
+            background: #e6f7ff;
+            color: #333;
+            padding: 20px;
+        }
+
+        a, button {
+            color: #fdfbfd; /* Violet */
+            background-color: #bb76bb; /* Violet background for buttons */
+            padding: 8px 16px; /* Smaller padding for smaller buttons */
+            border: none;
+            text-decoration: none; /* Remove underline from links */
+            font-size: smaller; /* Smaller font size for buttons */
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            background: #fff;
+            padding: 10px;
+            margin-bottom: 10px; /* Adds space between tasks */
+            border-left: 5px solid #800080; /* Violet border */
+            border-radius: 5px; /* Rounded corners for the task box */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+            position: relative; /* Needed for absolute positioning inside */
+        }
+
+        .task-details {
+            margin-right: 150px; /* Reserve space for buttons */
+        }
+
+        .task-actions {
+            position: absolute;
+            top: 10px; /* Align with the top of the task box */
+            right: 10px; /* Align with the right of the task box */
+            text-align: right;
+        }
+
+        select, input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+        }
+
+        form {
+            background: #fff;
+            padding: 15px;
+        }
+
+        h1, h2 {
+            color: #333;
+            text-align: center; /* Center-align titles */
+        }
+    </style>
+</head>
+<body>
+    <h1>Užduočių Valdymas</h1>
+    <ul>
+        {% for task in tasks %}
+        <li>
+            <div class="task-details">
+                <strong>{{ task.title }}</strong> - {{ task.description }} ({{ task.status }})
+                <br>Assigned to: {{ task.user }}
+            </div>
+            <div class="task-actions">
+                <a href="{{ url_for('task_detail', task_id=task.id) }}" style="padding: 5px 10px; font-size: small;">Edit</a>
+                <form action="{{ url_for('delete_task', task_id=task.id) }}" method="post" style="display: inline;">
+                    <button type="submit" style="padding: 5px 10px; font-size: small;">Delete</button>
+                </form>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    <h2>Pridėti naują užduotį</h2>
+    <form action="{{ url_for('manage_tasks') }}" method="post">
+        <input type="text" name="title" placeholder="Pavadinimas" required>
+        <textarea name="description" placeholder="Apibūdinimas" required></textarea>
+        <select name="user" required>
+            <option value="">Pasirinkite vartotoją</option>
+            {% for user in users %}
+            <option value="{{ user }}">{{ user }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Pridėti užduotį</button>
+    </form>
+    <div style="text-align: center;">
+        <a href="{{ url_for('index') }}">Grįžti į pradžią</a>
+    </div>
+</body>
+</html>
+
+
